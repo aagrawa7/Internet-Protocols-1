@@ -6,6 +6,10 @@ public class Test {
 		System.out.println("test file to make sure everything works.");
 		System.out.println("test 2");
 		String name = "Test 2 string";
+
 		System.out.println("hello test 3");
+
+		String name2 = "Test 3 String";
+
 	}
 }
