@@ -1,12 +1,10 @@
 import java.io.*;
-import java.lang.reflect.Array;
 import java.net.*;
 import java.util.LinkedList;
 
-/** "Hello World" level RECEIVE communications example */
-
 public class Server 
 {
+@SuppressWarnings("null")
 public static void main(String[] args)  throws Exception 
   {
   ServerSocket ss = new ServerSocket(7734);  //ServerSocket Connection
@@ -45,16 +43,59 @@ public static void main(String[] args)  throws Exception
 		System.out.println(activePeers.get(0).getPortNumber());
 		//what else to output
 		send.writeUTF("200 OK");
+		System.out.println("I added");
 	  }
 	  else if(message.contains("LOOKUP"))
 	  {
-		  
-		  send.writeUTF("200 OK");
-		  send.writeUTF("404 Not Found");
+		  PeerInformation Peeraddition2  = new PeerInformation(3457,"NCSU.EDU",3975,"TEST 1");
+		  PeerInformation Peeraddition1  = new PeerInformation(3257,"NCSU.EDU",3857,"TEST 3");
+		  PeerInformation Peeraddition3  = new PeerInformation(3457,"NCSU.EDU",3857,"TEST 3");
+		  activePeers.add(Peeraddition2); 
+		  activePeers.add(Peeraddition1);
+		  activePeers.add(Peeraddition3);
+		  System.out.println(activePeers.size());
+		  StringBuilder a = new StringBuilder();
+		  String lookup_name = null;
+		  try
+		  {
+			  
+			  System.out.println(activePeers.size());
+			  for (int x=0;x<activePeers.size();x++)
+			  	{
+				  System.out.println(rfcNumber);
+				  System.out.println(activePeers.get(x).getRFC());
+				  System.out.println(" i made inside for");
+				  if(activePeers.get(x).getRFC()==rfcNumber)
+				  {
+					  lookup_name.concat("RFC " + activePeers.get(x).getRFC() + " " + activePeers.get(x).getTitle() + " " + activePeers.get(x).getHost() + " " + activePeers.get(x).getPortNumber() + "\n"); 
+					  System.out.println(lookup_name);
+					  System.out.println(" iam inside");
+				  }
+			  	}
+		  send.writeUTF(lookup_name);
+		  //send.writeUTF("200 OK");
+		  //send.writeUTF("404 Not Found");
+		  System.out.println("I am here two");
+		  }
+		  catch (NullPointerException e)
+		  {
+			  send.writeUTF("bad");
+		  }
 	  }
 	  else if(message.contains("LIST"))
 	  {
+		  System.out.println(portNumber + "\n");
+		  System.out.println(host);
+		  StringBuilder a = new StringBuilder();
+		  for(int x=0;x<activePeers.size();x++)
+		  {
+			  String list_name = "RFC " + activePeers.get(x).getRFC() + " " + activePeers.get(x).getTitle() + " " + activePeers.get(x).getHost() + " " + activePeers.get(x).getPortNumber() + "\n"; 
+			  a.append(list_name);
+		  }
+		  System.out.println(a);
+		  //send.writeUTF(a);
 		  send.writeUTF("200 OK");
+		  System.out.println("here three");
 	  }
 	  else
 	  {
@@ -65,6 +106,7 @@ public static void main(String[] args)  throws Exception
 	  //dis.close(); // hang up! 
 	  //send.close();// hang up!
 	  //System.out.println(message);
+	  //ss.close();
   	}
   }
 }

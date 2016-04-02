@@ -1,7 +1,5 @@
 
 public class PeerInformation {
-
-	
 	private int rfcNumber;
 	private String host;
 	private int portNumber;
@@ -13,7 +11,6 @@ public class PeerInformation {
 		this.portNumber = portNumber;
 		this.title = title;
 	}
-
 	//getter
 	public int getRFC () {return rfcNumber;}
 	public String getHost() {return host;}
